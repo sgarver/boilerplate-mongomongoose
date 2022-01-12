@@ -21,7 +21,17 @@ const createAndSavePerson = (done) => {
     done(null, Person);
 };
 
-createAndSavePerson((error, result) => { console.log(result); });
+createAndSavePerson((error, result) => { 
+    console.log(result); 
+    
+
+    const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
+
+    person.save((err, data) => {
+        console.log(person);
+    });
+
+});
 
 
 
