@@ -18,19 +18,19 @@ const createAndSavePerson = (done) => {
 
     if (!Person) return done("Person was not created");
 
-    done(null, Person);
+    const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
+
+    person.save((err, data) => {
+        if (!data) {
+            done(err);
+        } else {
+            done(null, person);
+        }
+    });
 };
 
 createAndSavePerson((error, result) => { 
     console.log(result); 
-    
-
-    const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
-
-    person.save((err, data) => {
-        console.log(person);
-    });
-
 });
 
 
