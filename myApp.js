@@ -20,7 +20,7 @@ const createAndSavePerson = (done) => {
 
     const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
 
-    person.save(function(err, data) {
+    person.save((err, data) => {
         if (err) return done(err);
 
         done(null, data);
@@ -28,7 +28,8 @@ const createAndSavePerson = (done) => {
 };
 
 createAndSavePerson((error, result) => { 
-    console.log(Person);
+    const person = result;
+
     console.log(result);
 });
 
