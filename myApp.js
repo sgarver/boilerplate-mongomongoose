@@ -4,20 +4,15 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
-let Person;
+const personSchema = new mongoose.Schema({
+    name: String,
+    age: Number,
+    favoriteFoods: [String]
+});
+
 
 const createAndSavePerson = (done) => {
-
-    const personSchema = new mongoose.Schema({
-        name: String,
-        age: Number,
-        favoriteFoods: [String]
-    });
-
-    Person = mongoose.model('Person', personSchema);
-
-    if (!Person) return done("Person was not created");
-
+    const Person = mongoose.model('Person', personSchema);
     const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
 
     person.save((err, data) => {
@@ -26,15 +21,6 @@ const createAndSavePerson = (done) => {
         done(null, data);
     });
 };
-
-createAndSavePerson((error, result) => { 
-    const person = result;
-
-    console.log(result);
-});
-
-
-
 
 const createManyPeople = (arrayOfPeople, done) => {
   done(null /*, data*/);
