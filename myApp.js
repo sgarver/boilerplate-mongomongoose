@@ -100,12 +100,10 @@ const findAndUpdate = (personName, done) => {
     const options = { new: true };
 
     Person.findOneAndUpdate(filter, update, options, (err, newPerson) => {
-        if (err) done(err);
+        if (err) return done(err);
 
         done(null, newPerson);
     });
-
-    done(null, newPerson);
 };
 
 const removeById = (personId, done) => {
