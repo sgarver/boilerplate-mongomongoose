@@ -131,14 +131,17 @@ const queryChain = (done) => {
     Person.find({food: foodToSearch}, (err, done) => {
         if (err) return done(err);
         done(null, result);
-    }).sort('name')
-    }).limit(query.limit, (err, done) => {
+    })
+    .sort('name')
+    .limit(query.limit, (err, done) => {
         if (err) return done(err);
         done(null, result);
-    }).select('-age', (err, done) => {
+    })
+    .select('-age', (err, done) => {
         if (err) return done(err);
         done(null, result);
-    }).exec((err, result) => done(null, result));
+    })
+    .exec((err, result) => done(null, result));
 
 };
 
