@@ -61,6 +61,12 @@ const findPersonById = (personId, done) => {
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
 
+
+
+    Person.findById((err, person) => {
+    });
+
+
   const foundPerson = findPersonById(personId, (err, data) => {
     console.log(data);
 
