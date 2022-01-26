@@ -1,8 +1,12 @@
+
 require('dotenv').config();
 
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
 
 const personSchema = new mongoose.Schema({
     name: String,
@@ -14,7 +18,11 @@ const Person = mongoose.model('Person', personSchema);
 
 
 const createAndSavePerson = (done) => {
-    const person = new Person({name: "Bob Smith", age: 77, favoriteFoods: ["Pizza", "Salad"]});
+    const person = new Person({
+        name: "Bob Smith",
+        age: 77,
+        favoriteFoods: ["Pizza", "Salad"]
+    });
 
     person.save((err, data) => {
         if (err) return done(err);
@@ -32,7 +40,9 @@ const createManyPeople = (arrayOfPeople, done) => {
 };
 
 const findPeopleByName = (personName, done) => {
-    const foundPerson = Person.find({name: personName}, (err, data) => {
+    const foundPerson = Person.find({
+        name: personName
+    }, (err, data) => {
         if (err) return done(err);
 
         return done(null, data);
@@ -40,7 +50,9 @@ const findPeopleByName = (personName, done) => {
 };
 
 const findOneByFood = (food, done) => {
-    const foundPerson = Person.findOne({favoriteFoods: food}, (err, data) => {
+    const foundPerson = Person.findOne({
+        favoriteFoods: food
+    }, (err, data) => {
         if (err) return done(err);
 
         return done(null, data);
@@ -49,7 +61,9 @@ const findOneByFood = (food, done) => {
 
 const findPersonById = (personId, done) => {
 
-    Person.findOne({_id: personId}, (err, data) => {
+    Person.findOne({
+        _id: personId
+    }, (err, data) => {
         if (err) {
             done(err);
         } else {
@@ -78,31 +92,37 @@ const findEditThenSave = (personId, done) => {
 };
 
 
-const findAndUpdate = (personName, done) => {
-  const ageToSet = 20;
+const findAndUpdate = async (personName, done) => {
+    const ageToSet = 20;
 
-  done(null /*, data*/);
+    const filter = { name: personName };
+    const update = { age: ageToSet };
+    const options = { new: true };
+
+    const newPerson = await Person.findOneAndUpdate(filter, update, options);
+
+    done(null, newPerson);
 };
 
 const removeById = (personId, done) => {
-  done(null /*, data*/);
+    done(null /*, data*/ );
 };
 
 const removeManyPeople = (done) => {
-  const nameToRemove = "Mary";
+    const nameToRemove = "Mary";
 
-  done(null /*, data*/);
+    done(null /*, data*/ );
 };
 
 const queryChain = (done) => {
-  const foodToSearch = "burrito";
+    const foodToSearch = "burrito";
 
-  done(null /*, data*/);
+    done(null /*, data*/ );
 };
 
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
- */
+*/
 
 //----- **DO NOT EDIT BELOW THIS LINE** ----------------------------------
 
@@ -117,3 +137,5 @@ exports.createManyPeople = createManyPeople;
 exports.removeById = removeById;
 exports.removeManyPeople = removeManyPeople;
 exports.queryChain = queryChain;
+
+
