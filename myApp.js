@@ -121,7 +121,6 @@ const removeManyPeople = (done) => {
 
     Person.remove({name: nameToRemove}, (err, result) => {
         if (err) return done(err);
-
         done(null, result);
     });
 };
@@ -129,7 +128,20 @@ const removeManyPeople = (done) => {
 const queryChain = (done) => {
     const foodToSearch = "burrito";
 
-    done(null /*, data*/ );
+    Person.find({food: foodToSearch}, (err, done) => {
+        if (err) return done(err);
+        done(null, result);
+    }).sort('name', (err, done) => {
+        if (err) return done(err);
+        done(null, result);
+    }).limit(query.limit, (err, done) => {
+        if (err) return done(err);
+        done(null, result);
+    }).select('-age', (err, done) => {
+        if (err) return done(err);
+        done(null, result);
+    }).exec(() => done(null, result));
+
 };
 
 /** **Well Done !!**
