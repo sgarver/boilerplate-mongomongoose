@@ -59,8 +59,6 @@ const findPersonById = (personId, done) => {
 };
 
 const findEditThenSave = (personId, done) => {
-    if (err) return done(err);
-
     const foodToAdd = "hamburger";
 
     findPersonById(personId, (err, person) => {
