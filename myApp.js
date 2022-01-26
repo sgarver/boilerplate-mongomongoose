@@ -99,7 +99,9 @@ const findAndUpdate = (personName, done) => {
     const update = { age: ageToSet };
     const options = { new: true };
 
-    Person.findOneAndUpdate(filter, update, options);
+    const newPerson = Person.findOneAndUpdate(filter, update, options);
+
+    done(null, newPerson);
 };
 
 const removeById = (personId, done) => {
