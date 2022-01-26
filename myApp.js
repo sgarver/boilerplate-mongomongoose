@@ -133,16 +133,11 @@ const queryChain = (done) => {
         done(null, result);
     })
     .sort('name')
-    .limit(query.limit, (err, done) => {
-        if (err) return done(err);
+    .limit(2)
+    .select('-age')
+    .exec((err, result) => {
         done(null, result);
-    })
-    .select('-age', (err, done) => {
-        if (err) return done(err);
-        done(null, result);
-    })
-    .exec((err, result) => done(null, result));
-
+    });
 };
 
 /** **Well Done !!**
