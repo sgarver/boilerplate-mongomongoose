@@ -100,7 +100,7 @@ const findAndUpdate = (personName, done) => {
     const options = { new: true };
 
     Person.findOneAndUpdate(filter, update, options, (err, newPerson) => {
-        if (err) return done(err);
+        if (err) done(err);
 
         done(null, newPerson);
     });
