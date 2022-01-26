@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true });
 
+console.log("test");
+
 const personSchema = new mongoose.Schema({
     name: String,
     age: Number,
@@ -59,29 +61,26 @@ const findPersonById = (personId, done) => {
 };
 
 const findEditThenSave = (personId, done) => {
-  const foodToAdd = "hamburger";
+    if (err) return done(err);
 
+    const foodToAdd = "hamburger";
 
+    findPersonById(personId, (err, person) => {
+        if (err) return done(err);
 
-    Person.findById((err, person) => {
+        person.favoriteFoods.push(foodToAdd);
+
+        person.save(err, person => {
+            if (err) return done(err);
+
+            console.log(person);
+
+            done(null, person);
+        });
     });
 
-
-  const foundPerson = findPersonById(personId, (err, data) => {
-    console.log(data);
-
-    data.favoriteFoods.push(foodToAdd);
-    data.save();
-
-    if (err) {
-            done(err);
-        } else {
-            done(null, data);
-        }
-    }
-  });
-
 };
+
 
 const findAndUpdate = (personName, done) => {
   const ageToSet = 20;
