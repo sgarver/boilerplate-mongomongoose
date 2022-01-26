@@ -92,14 +92,14 @@ const findEditThenSave = (personId, done) => {
 };
 
 
-const findAndUpdate = async (personName, done) => {
+const findAndUpdate = (personName, done) => {
     const ageToSet = 20;
 
     const filter = { name: personName };
     const update = { age: ageToSet };
     const options = { new: true };
 
-    const newPerson = await Person.findOneAndUpdate(filter, update, options);
+    const newPerson = Person.findOneAndUpdate(filter, update, options);
 
     done(null, newPerson);
 };
